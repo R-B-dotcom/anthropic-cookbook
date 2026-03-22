@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anthropic Cookbook Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Anthropic Cookbook</h1>
+        <p class="subtitle">Browse notebook and markdown recipes in one searchable view.</p>
+      </header>
+
+      <section class="controls">
+        <form method="get">
+          <label>
+            Search
+            <input name="q" value="{{ query }}" placeholder="Try: rag, vision, sql..." />
+          </label>
+
+          <label>
+            Category
+            <select name="category">
+              <option value="all" {% if selected_category == 'all' %}selected{% endif %}>All</option>
+              {% for category in categories %}
+              <option value="{{ category }}" {% if selected_category == category %}selected{% endif %}>{{ category }}</option>
+              {% endfor %}
+            </select>
+          </label>
+
+          <label>
+            Type
+            <select name="type">
+              <option value="all" {% if selected_type == 'all' %}selected{% endif %}>All</option>
+              {% for ext in types %}
+              <option value="{{ ext }}" {% if selected_type == ext %}selected{% endif %}>{{ ext.upper() }}</option>
+              {% endfor %}
+            </select>
+          </label>
+
+          <button type="submit">Apply</button>
+        </form>
+      </section>
+
+      <section class="stats">
+        <strong>{{ recipes|length }}</strong> matching recipes of <strong>{{ total_count }}</strong> total
+      </section>
+
+      <section>
+        {% if recipes %}
+        <ul class="cards">
+          {% for recipe in recipes %}
+          <li>
+            <h2>{{ recipe.title }}</h2>
+            <p class="path">{{ recipe.path }}</p>
+            <div class="meta">
+              <span>{{ recipe.category }}</span>
+              <span>{{ recipe.extension }}</span>
+            </div>
+            <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/{{ recipe.path }}" target="_blank" rel="noreferrer">Open on GitHub</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No recipes matched your filters.</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

@@ -64,6 +64,11 @@ If you have ideas for new examples or guides, share them on the [issues page](ht
 - [Create a moderation filter](https://github.com/anthropics/anthropic-cookbook/blob/main/misc/building_moderation_filter.ipynb): Use Claude to create a content moderation filter for your application.
 - [Prompt caching](https://github.com/anthropics/anthropic-cookbook/blob/main/misc/prompt_caching.ipynb): Learn techniques for efficient prompt caching with Claude.
 
+
+## Local Web App
+
+Prefer a visual browser for the recipes? A small Flask app is included in [`webapp/`](webapp/README.md) with search and filtering.
+
 ## Additional Resources
 
 - [Anthropic on AWS](https://github.com/aws-samples/anthropic-on-aws): Explore examples and solutions for using Claude on AWS infrastructure.
