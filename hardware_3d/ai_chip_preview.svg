@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0c142b"/><stop offset="1" stop-color="#1d2d56"/></linearGradient>
+    <linearGradient id="chip" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#243d2f"/><stop offset="1" stop-color="#2d8058"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <text x="70" y="80" fill="#f0f5ff" font-family="Arial" font-size="44" font-weight="700">AI Chip Compute Module — iPhone Preview</text>
+  <polygon points="250,580 700,580 920,450 470,450" fill="url(#chip)" stroke="#9ef0c5" stroke-width="3"/>
+  <polygon points="470,450 920,450 920,350 470,350" fill="#2f3f3a"/>
+  <polygon points="700,580 920,450 920,350 700,480" fill="#38584c"/>
+  <rect x="510" y="390" width="220" height="130" rx="8" fill="#1a1a1f" stroke="#7983a4"/>
+  <rect x="485" y="375" width="270" height="15" fill="#bcc3cf"/>
+  <g fill="#dfe6ef">
+    <rect x="500" y="350" width="8" height="140"/><rect x="520" y="350" width="8" height="140"/><rect x="540" y="350" width="8" height="140"/>
+    <rect x="560" y="350" width="8" height="140"/><rect x="580" y="350" width="8" height="140"/><rect x="600" y="350" width="8" height="140"/>
+    <rect x="620" y="350" width="8" height="140"/><rect x="640" y="350" width="8" height="140"/><rect x="660" y="350" width="8" height="140"/>
+    <rect x="680" y="350" width="8" height="140"/><rect x="700" y="350" width="8" height="140"/><rect x="720" y="350" width="8" height="140"/>
+  </g>
+  <rect x="405" y="410" width="48" height="74" fill="#243a80"/><rect x="752" y="410" width="48" height="74" fill="#243a80"/>
+  <text x="72" y="710" fill="#b8c3e8" font-family="Arial" font-size="30">Use ai_chip_viewer.html for touch-rotatable 3D</text>
+</svg>
