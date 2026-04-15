@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="space" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#040814"/><stop offset="1" stop-color="#0e1a3a"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#space)"/>
+  <text x="60" y="82" fill="#f4f8ff" font-family="Arial" font-size="42" font-weight="700">AI Satellite + Robotic Modules — iPhone Preview</text>
+  <rect x="120" y="355" width="260" height="90" fill="#2f7bf2" stroke="#8ec5ff"/>
+  <rect x="820" y="355" width="260" height="90" fill="#2f7bf2" stroke="#8ec5ff"/>
+  <rect x="450" y="300" width="300" height="200" rx="10" fill="#c9cfd8" stroke="#f2f6ff"/>
+  <circle cx="600" cy="380" r="58" fill="#2f3e45"/>
+  <rect x="585" y="228" width="30" height="72" fill="#d7dde6"/>
+  <circle cx="600" cy="205" r="24" fill="#ecf1f8"/>
+  <g fill="#f39a28">
+    <circle cx="600" cy="542" r="24"/><circle cx="600" cy="258" r="24"/><circle cx="432" cy="400" r="24"/><circle cx="768" cy="400" r="24"/>
+  </g>
+  <g fill="#111418"><circle cx="520" cy="520" r="18"/><circle cx="680" cy="520" r="18"/><circle cx="520" cy="280" r="18"/><circle cx="680" cy="280" r="18"/></g>
+  <text x="62" y="718" fill="#a7b7e4" font-family="Arial" font-size="30">Use ai_satellite_viewer.html for touch-rotatable 3D</text>
+</svg>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Satellite 3D Viewer</title>
+  <style>
+    body { margin:0; background:#03050f; color:#e7ebff; font-family:-apple-system,sans-serif; }
+    #ui { position:fixed; top:10px; left:10px; right:10px; z-index:2; background:rgba(6,10,22,.76); border:1px solid #2d3b7a; border-radius:12px; padding:10px; }
+    #ui a { color:#5dd8ff; }
+    #c { width:100vw; height:100vh; display:block; }
+  </style>
+</head>
+<body>
+  <div id="ui"><strong>AI Satellite Platform</strong> · drag to rotate, pinch/scroll to zoom · <a href="iphone_quick_view.html">back</a></div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.161.0/build/three.module.js';
+    import { OrbitControls } from 'https://unpkg.com/three@0.161.0/examples/jsm/controls/OrbitControls.js';
+
+    const canvas = document.getElementById('c');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x03050f);
+
+    const camera = new THREE.PerspectiveCamera(45, 2, 0.1, 2000);
+    camera.position.set(280,170,280);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.target.set(0,0,0);
+
+    scene.add(new THREE.HemisphereLight(0xa5c5ff, 0x050814, 1.0));
+    const sun = new THREE.DirectionalLight(0xffffff, 1.25); sun.position.set(200,320,120); scene.add(sun);
+
+    const bus = new THREE.Mesh(new THREE.BoxGeometry(60,50,60), new THREE.MeshStandardMaterial({color:0xc9ced9, roughness:0.55}));
+    scene.add(bus);
+
+    const core = new THREE.Mesh(new THREE.CylinderGeometry(16,16,30,40), new THREE.MeshStandardMaterial({color:0x2f3d44, roughness:0.35}));
+    core.rotation.x = Math.PI/2; core.position.y = 8; scene.add(core);
+
+    const mast = new THREE.Mesh(new THREE.CylinderGeometry(3,3,30,20), new THREE.MeshStandardMaterial({color:0xd6dae1, metalness:0.55, roughness:0.3}));
+    mast.position.y = 55; scene.add(mast);
+    const dish = new THREE.Mesh(new THREE.SphereGeometry(9,32,24), new THREE.MeshStandardMaterial({color:0xe9edf3, metalness:0.5, roughness:0.25}));
+    dish.position.y = 70; scene.add(dish);
+
+    const panelMat = new THREE.MeshStandardMaterial({color:0x2f7ef5, roughness:0.25, metalness:0.15});
+    const trussMat = new THREE.MeshStandardMaterial({color:0x787f8c, roughness:0.4});
+    [-1,1].forEach(side => {
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(120,2.2,80), panelMat);
+      panel.position.set(side*95,0,0); scene.add(panel);
+      [0,25,-25].forEach(z => {
+        const truss = new THREE.Mesh(new THREE.CylinderGeometry(z===0?1.8:1.2,z===0?1.8:1.2,80,16), trussMat);
+        truss.rotation.z = Math.PI/2; truss.position.set(side*50,0,z); scene.add(truss);
+      });
+    });
+
+    const dockMat = new THREE.MeshStandardMaterial({color:0xf39a28, roughness:0.5});
+    for (let i=0;i<4;i++) {
+      const g = new THREE.Group();
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(10,2.4,16,40), dockMat);
+      ring.rotation.y = Math.PI/2; ring.position.x = 42; ring.position.y = -8;
+      const arm = new THREE.Mesh(new THREE.BoxGeometry(22,7,9), new THREE.MeshStandardMaterial({color:0xcb6b19}));
+      arm.position.set(54,-8,0);
+      const tip = new THREE.Mesh(new THREE.SphereGeometry(5,24,20), dockMat);
+      tip.position.set(66,-8,0);
+      g.add(ring, arm, tip);
+      g.rotation.y = i*Math.PI/2;
+      scene.add(g);
+    }
+
+    const thrusterMat = new THREE.MeshStandardMaterial({color:0x101215});
+    const nozzleMat = new THREE.MeshStandardMaterial({color:0x555c67});
+    [-24,24].forEach(x => [-24,24].forEach(z => {
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(5,5,10,20), thrusterMat);
+      body.rotation.x = Math.PI/2; body.position.set(x,-28,z); scene.add(body);
+      const nozzle = new THREE.Mesh(new THREE.CylinderGeometry(3.2,3.2,3,20), nozzleMat);
+      nozzle.rotation.x = Math.PI/2; nozzle.position.set(x,-33,z); scene.add(nozzle);
+    }));
+
+    const bay = new THREE.Mesh(new THREE.BoxGeometry(34,14,10), new THREE.MeshStandardMaterial({color:0x6d7883}));
+    bay.position.set(0,6,34); scene.add(bay);
+    const lens = new THREE.Mesh(new THREE.BoxGeometry(22,9,2), new THREE.MeshStandardMaterial({color:0x84f0ff, emissive:0x12343c, emissiveIntensity:0.2}));
+    lens.position.set(0,6,39); scene.add(lens);
+
+    function onResize(){ const w=window.innerWidth,h=window.innerHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    window.addEventListener('resize', onResize); onResize();
+    renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene,camera); });
+  </script>
+</body>
+</html>
